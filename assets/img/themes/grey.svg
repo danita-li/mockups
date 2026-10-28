@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 280">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#ccd0d4"/>
+      <stop offset="0.5" stop-color="#a2a7ad"/>
+      <stop offset="1" stop-color="#74797f"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#2f3338" stop-opacity="0.18"/>
+    </linearGradient>
+    <radialGradient id="drop" cx="34%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#fafcfd"/>
+      <stop offset="0.42" stop-color="#cdd2d7"/>
+      <stop offset="0.8" stop-color="#9ba1a7"/>
+      <stop offset="1" stop-color="#7c8288"/>
+    </radialGradient>
+    <g id="dropShape">
+      <ellipse rx="9" ry="11" fill="url(#drop)" opacity="0.93"/>
+      <ellipse cx="-2.6" cy="-3.8" rx="2.6" ry="3.4" fill="#ffffff" opacity="0.78"/>
+      <path d="M-5.4 4.6 A9 11 0 0 0 6.2 7.6" fill="none" stroke="#5f646a" stroke-opacity="0.3" stroke-width="1.4"/>
+    </g>
+    <filter id="soft"><feGaussianBlur stdDeviation="3.5"/></filter>
+  </defs>
+  <rect width="200" height="280" fill="url(#bg)"/>
+  <rect width="200" height="280" fill="url(#sheen)"/>
+  <g filter="url(#soft)" opacity="0.35">
+    <use xlink:href="#dropShape" transform="translate(48 52) scale(1.5)"/>
+    <use xlink:href="#dropShape" transform="translate(136 108) scale(1.8)"/>
+    <use xlink:href="#dropShape" transform="translate(74 204) scale(1.6)"/>
+  </g>
+  <g>
+    <use xlink:href="#dropShape" transform="translate(30 38) scale(0.9) rotate(-8)"/>
+    <use xlink:href="#dropShape" transform="translate(82 28) scale(0.65) rotate(6)"/>
+    <use xlink:href="#dropShape" transform="translate(142 34) scale(1.1) rotate(-4)"/>
+    <use xlink:href="#dropShape" transform="translate(180 70) scale(0.7) rotate(10)"/>
+    <use xlink:href="#dropShape" transform="translate(56 92) scale(1.25) rotate(-6)"/>
+    <use xlink:href="#dropShape" transform="translate(112 78) scale(0.8) rotate(8)"/>
+    <use xlink:href="#dropShape" transform="translate(168 116) scale(0.95) rotate(-10)"/>
+    <use xlink:href="#dropShape" transform="translate(26 132) scale(0.75) rotate(4)"/>
+    <use xlink:href="#dropShape" transform="translate(88 140) scale(1.2) rotate(-5)"/>
+    <use xlink:href="#dropShape" transform="translate(142 166) scale(0.7) rotate(12)"/>
+    <use xlink:href="#dropShape" transform="translate(188 170) scale(0.6) rotate(-8)"/>
+    <use xlink:href="#dropShape" transform="translate(44 184) scale(0.95) rotate(6)"/>
+    <use xlink:href="#dropShape" transform="translate(104 200) scale(1.35) rotate(-4)"/>
+    <use xlink:href="#dropShape" transform="translate(164 216) scale(0.8) rotate(9)"/>
+    <use xlink:href="#dropShape" transform="translate(20 228) scale(0.65) rotate(-12)"/>
+    <use xlink:href="#dropShape" transform="translate(70 246) scale(1.05) rotate(5)"/>
+    <use xlink:href="#dropShape" transform="translate(128 258) scale(0.75) rotate(-7)"/>
+    <use xlink:href="#dropShape" transform="translate(184 252) scale(0.9) rotate(3)"/>
+    <use xlink:href="#dropShape" transform="translate(148 96) scale(0.5) rotate(-6)"/>
+    <use xlink:href="#dropShape" transform="translate(60 152) scale(0.55) rotate(8)"/>
+    <use xlink:href="#dropShape" transform="translate(22 78) scale(0.5) rotate(-4)"/>
+    <use xlink:href="#dropShape" transform="translate(120 114) scale(0.45) rotate(5)"/>
+  </g>
+  <g fill="#f2f5f7" opacity="0.85">
+    <circle cx="98" cy="46" r="1.6"/>
+    <circle cx="156" cy="58" r="1.3"/>
+    <circle cx="42" cy="160" r="1.5"/>
+    <circle cx="122" cy="176" r="1.2"/>
+    <circle cx="88" cy="236" r="1.4"/>
+    <circle cx="172" cy="202" r="1.1"/>
+    <circle cx="12" cy="106" r="1.3"/>
+  </g>
+</svg>

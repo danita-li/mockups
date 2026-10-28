@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280">
+  <defs>
+    <radialGradient id="bg" cx="34%" cy="10%" r="120%">
+      <stop offset="0" stop-color="#a7e63a"/>
+      <stop offset="0.4" stop-color="#6dbc19"/>
+      <stop offset="0.75" stop-color="#3f8a0b"/>
+      <stop offset="1" stop-color="#245706"/>
+    </radialGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#f2ffc4" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#d7ff85" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bok" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#eaffc4" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#bdf25e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="b2"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="b3"><feGaussianBlur stdDeviation="9"/></filter>
+    <g id="blade">
+      <path d="M0 0 C 6 -40 2 -80 12 -120" fill="none" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <rect width="200" height="280" fill="url(#bg)"/>
+  <g filter="url(#b3)" opacity="0.7">
+    <circle cx="46" cy="48" r="34" fill="url(#sun)"/>
+    <circle cx="164" cy="92" r="24" fill="url(#bok)"/>
+    <circle cx="86" cy="150" r="28" fill="url(#bok)"/>
+    <circle cx="148" cy="216" r="22" fill="url(#bok)"/>
+    <circle cx="30" cy="236" r="20" fill="url(#bok)"/>
+  </g>
+  <g filter="url(#b2)" opacity="0.8">
+    <circle cx="30" cy="98" r="10" fill="url(#bok)"/>
+    <circle cx="112" cy="62" r="8" fill="url(#bok)"/>
+    <circle cx="180" cy="40" r="7" fill="url(#bok)"/>
+    <circle cx="58" cy="178" r="9" fill="url(#bok)"/>
+    <circle cx="128" cy="150" r="7" fill="url(#bok)"/>
+    <circle cx="182" cy="182" r="8" fill="url(#bok)"/>
+    <circle cx="76" cy="252" r="7" fill="url(#bok)"/>
+    <circle cx="170" cy="262" r="9" fill="url(#bok)"/>
+  </g>
+  <g fill="none" stroke-linecap="round">
+    <g stroke="#2f6f08" stroke-width="5" opacity="0.9">
+      <path d="M12 286 C 18 236 8 196 24 156"/>
+      <path d="M62 290 C 54 244 66 206 56 168"/>
+      <path d="M142 288 C 150 242 140 204 156 168"/>
+      <path d="M186 290 C 178 250 190 214 180 182"/>
+    </g>
+    <g stroke="#4c9410" stroke-width="4">
+      <path d="M30 290 C 36 250 28 216 40 184"/>
+      <path d="M96 290 C 88 246 100 214 90 176"/>
+      <path d="M124 292 C 132 252 122 216 136 186"/>
+      <path d="M170 290 C 164 256 174 226 166 198"/>
+      <path d="M78 288 C 72 252 80 224 72 196"/>
+    </g>
+    <g stroke="#74b81c" stroke-width="3.2">
+      <path d="M6 284 C 12 248 4 220 14 192"/>
+      <path d="M48 286 C 42 250 52 224 44 198"/>
+      <path d="M88 288 C 94 254 84 228 96 200"/>
+      <path d="M112 290 C 106 258 116 232 108 206"/>
+      <path d="M158 288 C 164 256 154 230 166 202"/>
+      <path d="M194 290 C 186 258 196 234 188 210"/>
+      <path d="M134 290 C 128 260 138 238 130 214"/>
+      <path d="M22 288 C 26 262 18 242 28 218"/>
+    </g>
+    <g stroke="#a6e03a" stroke-width="2.4" opacity="0.95">
+      <path d="M38 288 C 44 258 34 236 46 210"/>
+      <path d="M70 290 C 64 264 74 242 66 220"/>
+      <path d="M104 288 C 110 262 100 240 112 216"/>
+      <path d="M150 290 C 144 266 154 246 146 224"/>
+      <path d="M178 288 C 184 264 174 244 186 222"/>
+      <path d="M56 290 C 50 268 60 250 52 230"/>
+      <path d="M118 292 C 124 270 114 252 126 232"/>
+    </g>
+    <g stroke="#ccf06c" stroke-width="1.8" opacity="0.8">
+      <path d="M16 290 C 22 270 12 256 22 238"/>
+      <path d="M82 290 C 76 270 86 256 78 238"/>
+      <path d="M138 290 C 144 270 134 256 146 238"/>
+      <path d="M190 290 C 184 272 194 258 186 242"/>
+    </g>
+  </g>
+  <g fill="#f4ffd6">
+    <circle cx="66" cy="40" r="1.4" opacity="0.8"/>
+    <circle cx="152" cy="62" r="1.2" opacity="0.7"/>
+    <circle cx="100" cy="108" r="1.5" opacity="0.75"/>
+    <circle cx="38" cy="142" r="1.2" opacity="0.6"/>
+    <circle cx="168" cy="148" r="1.3" opacity="0.7"/>
+    <circle cx="118" cy="196" r="1.1" opacity="0.55"/>
+  </g>
+</svg>
