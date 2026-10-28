@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 280">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#f8f1e5"/>
+      <stop offset="0.55" stop-color="#f1e6d5"/>
+      <stop offset="1" stop-color="#e6d8c2"/>
+    </linearGradient>
+    <radialGradient id="g1" cx="32%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#ffe3ae"/>
+      <stop offset="0.55" stop-color="#f8bd7c"/>
+      <stop offset="1" stop-color="#e89455"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="32%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#ffe6d0"/>
+      <stop offset="0.55" stop-color="#f7b4a2"/>
+      <stop offset="1" stop-color="#dd8a7c"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="32%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#fff3d6"/>
+      <stop offset="0.55" stop-color="#f8d69a"/>
+      <stop offset="1" stop-color="#dfa961"/>
+    </radialGradient>
+    <radialGradient id="g4" cx="32%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#ffdcc9"/>
+      <stop offset="0.55" stop-color="#f2a68f"/>
+      <stop offset="1" stop-color="#d67762"/>
+    </radialGradient>
+    <g id="petal">
+      <path d="M0 -15 C 10 -15 17 -6 15 4 C 13 13 6 20 0 22 C -6 20 -13 13 -15 4 C -17 -6 -10 -15 0 -15 Z"/>
+      <path d="M0 20 C 1 8 1 -2 0 -12" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="1.2"/>
+    </g>
+    <filter id="soft"><feGaussianBlur stdDeviation="3.2"/></filter>
+    <filter id="tiny"><feGaussianBlur stdDeviation="1.2"/></filter>
+  </defs>
+  <rect width="200" height="280" fill="url(#bg)"/>
+  <g filter="url(#soft)" opacity="0.5">
+    <use xlink:href="#petal" fill="url(#g3)" transform="translate(36 34) rotate(-31) scale(0.95)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(110 46) rotate(18) scale(0.8)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(172 70) rotate(-52) scale(0.9)"/>
+    <use xlink:href="#petal" fill="url(#g4)" transform="translate(28 128) rotate(42) scale(0.85)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(92 156) rotate(-14) scale(1)"/>
+    <use xlink:href="#petal" fill="url(#g3)" transform="translate(154 196) rotate(28) scale(0.9)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(54 238) rotate(-38) scale(0.9)"/>
+    <use xlink:href="#petal" fill="url(#g4)" transform="translate(126 258) rotate(12) scale(0.8)"/>
+  </g>
+  <g>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(24 32) rotate(-30) scale(0.86)"/>
+    <use xlink:href="#petal" fill="url(#g3)" transform="translate(72 20) rotate(16) scale(0.72)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(124 36) rotate(-56) scale(0.96)"/>
+    <use xlink:href="#petal" fill="url(#g4)" transform="translate(176 50) rotate(38) scale(0.78)"/>
+    <use xlink:href="#petal" fill="url(#g4)" transform="translate(42 74) rotate(-9) scale(0.82)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(96 64) rotate(-42) scale(0.68)"/>
+    <use xlink:href="#petal" fill="url(#g3)" transform="translate(150 80) rotate(24) scale(0.9)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(196 98) rotate(-14) scale(0.7)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(18 108) rotate(50) scale(0.72)"/>
+    <use xlink:href="#petal" fill="url(#g4)" transform="translate(66 104) rotate(-26) scale(0.88)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(118 114) rotate(9) scale(0.76)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(168 124) rotate(-46) scale(1)"/>
+    <use xlink:href="#petal" fill="url(#g3)" transform="translate(30 148) rotate(-34) scale(0.76)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(84 144) rotate(28) scale(0.92)"/>
+    <use xlink:href="#petal" fill="url(#g4)" transform="translate(138 154) rotate(-18) scale(0.72)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(188 162) rotate(44) scale(0.82)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(56 186) rotate(14) scale(0.86)"/>
+    <use xlink:href="#petal" fill="url(#g3)" transform="translate(104 180) rotate(-52) scale(0.96)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(156 192) rotate(34) scale(0.76)"/>
+    <use xlink:href="#petal" fill="url(#g4)" transform="translate(20 208) rotate(-22) scale(0.72)"/>
+    <use xlink:href="#petal" fill="url(#g2)" transform="translate(74 216) rotate(40) scale(0.82)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(128 224) rotate(-36) scale(0.88)"/>
+    <use xlink:href="#petal" fill="url(#g3)" transform="translate(178 234) rotate(18) scale(0.68)"/>
+    <use xlink:href="#petal" fill="url(#g3)" transform="translate(40 246) rotate(-44) scale(0.94)"/>
+    <use xlink:href="#petal" fill="url(#g4)" transform="translate(96 254) rotate(22) scale(0.78)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(150 264) rotate(-8) scale(0.86)"/>
+    <use xlink:href="#petal" fill="url(#g1)" transform="translate(10 264) rotate(52) scale(0.66)"/>
+  </g>
+  <g filter="url(#tiny)" opacity="0.5">
+    <circle cx="52" cy="56" r="2.2" fill="#e3b982"/>
+    <circle cx="132" cy="96" r="1.8" fill="#e0af78"/>
+    <circle cx="76" cy="128" r="2" fill="#dfae7b"/>
+    <circle cx="170" cy="176" r="2.4" fill="#ddaa74"/>
+    <circle cx="112" cy="206" r="1.7" fill="#ddb07c"/>
+    <circle cx="34" cy="222" r="2" fill="#e2b47f"/>
+    <circle cx="148" cy="140" r="1.6" fill="#e0b07a"/>
+  </g>
+</svg>
