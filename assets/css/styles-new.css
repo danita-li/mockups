@@ -2583,8 +2583,8 @@ body.live-room-mode .main { width: 100%; }
 .live-exit-stat span { display: block; margin-top: 6px; font-size: 13.5px; color: var(--muted); }
 .live-exit-actions { display: flex; justify-content: center; gap: 16px; }
 .live-exit-actions .btn { min-width: 160px; height: 44px; border-radius: var(--radius-pill); font-size: 14px; }
-.btn.live-exit-confirm { background: #f4511e; border-color: #f4511e; color: #fff; }
-.btn.live-exit-confirm:hover { background: #e64a19; border-color: #e64a19; }
+.btn.live-exit-confirm { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn.live-exit-confirm:hover { background: #2a2d33; border-color: #2a2d33; }
 .btn.live-exit-cancel { background: #fff; }
 
 .live-invite-title { font-size: 13px; font-weight: 600; color: var(--text); margin: 30px 0 17px; }

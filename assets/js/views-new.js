@@ -7,6 +7,7 @@
   const num = PB.num;
   const avatar = PB.avatar;
   const icon = window.icon;
+  const ASSET_BASE = window.PB_ASSET_BASE != null ? window.PB_ASSET_BASE : 'assets-new/';
 
   function giftEmoji(name) {
     return {
@@ -879,28 +880,28 @@
   }
 
   const MEMBER_PEOPLE = [
-    'assets-new/img/people/w44.jpg',
-    'assets-new/img/people/m32.jpg',
-    'assets-new/img/people/w68.jpg',
-    'assets-new/img/people/w12.jpg',
-    'assets-new/img/people/m76.jpg',
-    'assets-new/img/people/w21.jpg',
-    'assets-new/img/people/m54.jpg',
-    'assets-new/img/people/w33.jpg',
-    'assets-new/img/people/m85.jpg',
-    'assets-new/img/people/w50.jpg'
+    ASSET_BASE + 'img/people/w44.jpg',
+    ASSET_BASE + 'img/people/m32.jpg',
+    ASSET_BASE + 'img/people/w68.jpg',
+    ASSET_BASE + 'img/people/w12.jpg',
+    ASSET_BASE + 'img/people/m76.jpg',
+    ASSET_BASE + 'img/people/w21.jpg',
+    ASSET_BASE + 'img/people/m54.jpg',
+    ASSET_BASE + 'img/people/w33.jpg',
+    ASSET_BASE + 'img/people/m85.jpg',
+    ASSET_BASE + 'img/people/w50.jpg'
   ];
   const MEMBER_SCENES = [
-    'assets-new/img/scenes/s1.jpg',
-    'assets-new/img/scenes/s2.jpg',
-    'assets-new/img/scenes/s3.jpg',
-    'assets-new/img/scenes/s4.jpg'
+    ASSET_BASE + 'img/scenes/s1.jpg',
+    ASSET_BASE + 'img/scenes/s2.jpg',
+    ASSET_BASE + 'img/scenes/s3.jpg',
+    ASSET_BASE + 'img/scenes/s4.jpg'
   ];
   const MEMBER_PHOTO_BY_INDEX = [
     MEMBER_PEOPLE[0], MEMBER_SCENES[0], MEMBER_PEOPLE[2], MEMBER_PEOPLE[3], MEMBER_PEOPLE[4],
     MEMBER_SCENES[1], MEMBER_PEOPLE[6], MEMBER_PEOPLE[7], MEMBER_PEOPLE[8],
-    MEMBER_SCENES[2], 'assets-new/img/people/m50.jpg',
-    MEMBER_PEOPLE[5], 'assets-new/img/people/m12.jpg', MEMBER_SCENES[3]
+    MEMBER_SCENES[2], ASSET_BASE + 'img/people/m50.jpg',
+    MEMBER_PEOPLE[5], ASSET_BASE + 'img/people/m12.jpg', MEMBER_SCENES[3]
   ];
 
   function initialsFor(name) {
@@ -927,33 +928,33 @@
   const INVITE_PEOPLE = [
     {
       name: 'Julie Tran',
-      photo: 'assets-new/img/people/u1.jpg',
-      fallback: 'assets-new/img/people/w21.jpg'
+      photo: ASSET_BASE + 'img/people/u1.jpg',
+      fallback: ASSET_BASE + 'img/people/w21.jpg'
     },
     {
       name: 'Marcus Lee',
-      photo: 'assets-new/img/people/u2.jpg',
-      fallback: 'assets-new/img/people/m32.jpg'
+      photo: ASSET_BASE + 'img/people/u2.jpg',
+      fallback: ASSET_BASE + 'img/people/m32.jpg'
     },
     {
       name: 'Nina Patel',
-      photo: 'assets-new/img/people/u3.jpg',
-      fallback: 'assets-new/img/people/w33.jpg'
+      photo: ASSET_BASE + 'img/people/u3.jpg',
+      fallback: ASSET_BASE + 'img/people/w33.jpg'
     },
     {
       name: 'Sam Rivera',
-      photo: 'assets-new/img/people/u4.jpg',
-      fallback: 'assets-new/img/people/m54.jpg'
+      photo: ASSET_BASE + 'img/people/u4.jpg',
+      fallback: ASSET_BASE + 'img/people/m54.jpg'
     },
     {
       name: 'Avery Brooks',
-      photo: 'assets-new/img/people/u5.jpg',
-      fallback: 'assets-new/img/people/w68.jpg'
+      photo: ASSET_BASE + 'img/people/u5.jpg',
+      fallback: ASSET_BASE + 'img/people/w68.jpg'
     },
     {
       name: 'Theo Grant',
-      photo: 'assets-new/img/people/u6.jpg',
-      fallback: 'assets-new/img/people/m76.jpg'
+      photo: ASSET_BASE + 'img/people/u6.jpg',
+      fallback: ASSET_BASE + 'img/people/m76.jpg'
     }
   ];
 

@@ -61,8 +61,9 @@
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   }
 
-  const PROFILE_PHOTO = 'assets-new/img/danita-profile.jpg';
-  const PROFILE_PHOTO_FALLBACK = 'assets-new/img/people/w12.jpg';
+  const ASSET_BASE = window.PB_ASSET_BASE != null ? window.PB_ASSET_BASE : 'assets-new/';
+  const PROFILE_PHOTO = ASSET_BASE + 'img/danita-profile.jpg';
+  const PROFILE_PHOTO_FALLBACK = ASSET_BASE + 'img/people/w12.jpg';
 
   function photoAvatar(size, extraClass) {
     const s = size || 36;
@@ -1075,7 +1076,7 @@
         '<div class="live-info-label">Logo</div>' +
         '<div class="live-info-field"><span class="live-info-logo live-info-logo-photo" aria-hidden="true">' +
         '<span class="live-info-logo-letters">' + esc(logoInitials) + '</span>' +
-        '<img src="assets-new/img/live-show-logo.png" alt="" loading="lazy" onerror="this.remove()">' +
+        '<img src="' + ASSET_BASE + 'img/live-show-logo.png" alt="" loading="lazy" onerror="this.remove()">' +
         '</span></div>' +
         '</div>' +
         '<div class="live-info-row">' +
@@ -1284,7 +1285,7 @@
       body:
         '<div class="embed-label">Here’s a peek</div>' +
         '<div class="embed-preview">' +
-        '<div class="embed-cover"><img src="assets-new/img/danita-profile.jpg" alt=""></div>' +
+        '<div class="embed-cover"><img src="' + ASSET_BASE + 'img/danita-profile.jpg" alt=""></div>' +
         '<div class="embed-player-main">' +
         '<div class="embed-player-head"><div class="embed-player-meta">' +
         '<div class="embed-player-top"><span class="embed-tag">Replay</span><strong>' + esc(title) + '</strong></div>' +
