@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podbean · Loading 设计</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --lime:#8CC63F; --lime-deep:#4F7A18; --ink:#14161A; --muted:#6B7175;
+    --faint:#9AA0A3; --page-bg:#F5F6F6; --card:#fff; --line:#E2E4E2; --line-soft:#EDEEED;
+  }
+  body{
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:#F1F2F1;color:#26292E;font-size:14px;line-height:1.55;
+    padding:56px 40px 80px;display:flex;justify-content:center;
+  }
+  .wrap{width:100%;max-width:1280px}
+
+  /* ---------- two states ---------- */
+  .states{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .chip{width:56px;height:56px;border-radius:50%;background:#FCFCFC;
+    box-shadow:0 2px 12px rgba(15,17,21,.18);display:flex;align-items:center;justify-content:center}
+  .chip svg{width:30px;height:30px;animation:pbspin 1000ms linear infinite}
+  .chip circle{animation:pbbreathe 1200ms ease-in-out infinite}
+  .state-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .state-head{padding:22px 24px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .state-name{font-size:16px;font-weight:620;color:var(--ink);letter-spacing:-.012em}
+  .state-use{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .state-idx{font-size:10.5px;font-weight:650;letter-spacing:.08em;color:var(--lime-deep);
+    background:#F1F8E4;border-radius:6px;padding:4px 9px;white-space:nowrap}
+  .demo-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line-soft)}
+  .demo-row.single{grid-template-columns:1fr}
+  .demo{height:250px;display:flex;align-items:center;justify-content:center;position:relative}
+  .demo.light{background:var(--page-bg)}
+  .demo.dark{background:#0A0A0B}
+  .demo-cap{position:absolute;bottom:12px;left:14px;font-size:9.5px;font-weight:600;
+    letter-spacing:.09em;text-transform:uppercase;color:#A9ADAF}
+  .demo.dark .demo-cap{color:#565B5E}
+  .state-foot{padding:15px 24px 19px;border-top:1px solid var(--line-soft);display:flex;flex-wrap:wrap;gap:7px}
+  .tag{font-size:11.5px;font-weight:500;color:var(--muted);border:1px solid var(--line);
+    background:var(--card);padding:5px 11px;border-radius:999px}
+  .pb-load{display:flex;flex-direction:column;align-items:center;text-align:center;gap:calc(var(--mark) * .46)}
+  .pb-load .mark{width:var(--mark);height:var(--mark);display:block;animation:pbspin 1000ms linear infinite}
+  .pb-load .mark circle{animation:pbbreathe 1200ms ease-in-out infinite}
+  .pb-load .txt{display:flex;flex-direction:column;gap:calc(var(--mark) * .14)}
+  .pb-load .t1{font-size:var(--l1);font-weight:500;line-height:1.42;color:var(--c1)}
+  .pb-load .t2{font-size:var(--l2);font-weight:400;line-height:1.45;color:var(--c2);max-width:calc(var(--mark) * 6.6)}
+  @keyframes pbspin{to{transform:rotate(360deg)}}
+  @keyframes pbbreathe{0%,100%{stroke-dasharray:60.2 12.1}50%{stroke-dasharray:24.1 48.2}}
+
+  /* ---------- per screen ---------- */
+  .sec-head{margin:64px 0 4px;display:flex;align-items:baseline;gap:16px}
+  .sec-head h2{font-size:22px;font-weight:620;color:var(--ink);letter-spacing:-.018em}
+  .sec-head span{font-size:13px;color:var(--muted)}
+  .screens{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+  .sc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px}
+  .pair{display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;align-items:start}
+  .col{position:relative}
+  .col em{display:block;font-style:normal;font-size:9px;font-weight:650;letter-spacing:.1em;
+    color:var(--faint);margin-bottom:6px}
+  .col.after em{color:#6A9B29}
+  .pair img{width:100%;display:block;border-radius:9px;border:1px solid var(--line-soft)}
+  .arw{display:flex;align-items:center;justify-content:center;height:100%;color:#C3C7C4;padding-top:22px}
+  .cap{margin-top:12px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .cap b{font-size:13.5px;font-weight:620;color:var(--ink)}
+  .cap span{font-size:11.5px;color:var(--muted);text-align:right}
+
+  @media (prefers-reduced-motion:reduce){ .pb-load .mark,.pb-load .mark circle{animation:none} }
+  @media (max-width:1100px){ .screens{grid-template-columns:1fr} }
+  @media (max-width:1100px){ .states{grid-template-columns:1fr 1fr} }
+  @media (max-width:860px){ body{padding:32px 18px} .states{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+
+  <div class="states">
+    <div class="state-card">
+      <div class="state-head">
+        <div>
+          <div class="state-name">A · 无字加载</div>
+          <div class="state-use">内容区加载 / 空态 / 局部占位</div>
+        </div>
+        <div class="state-idx">BARE</div>
+      </div>
+      <div class="demo-row">
+        <div class="demo light">
+          <div class="pb-load" style="--mark:52px">
+            <svg class="mark" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="11.5"
+              fill="none" stroke="#4F7A18" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="54.2 18.1"/></svg>
+          </div>
+          <div class="demo-cap">Light</div>
+        </div>
+        <div class="demo dark">
+          <div class="pb-load" style="--mark:52px">
+            <svg class="mark" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="11.5"
+              fill="none" stroke="#8CC63F" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="54.2 18.1"/></svg>
+          </div>
+          <div class="demo-cap">Dark</div>
+        </div>
+      </div>
+      <div class="state-foot">
+        <span class="tag">28dp 默认</span><span class="tag">36dp 整页</span><span class="tag">20dp 行内</span>
+      </div>
+    </div>
+
+    <div class="state-card">
+      <div class="state-head">
+        <div>
+          <div class="state-name">B · 有字加载</div>
+          <div class="state-use">动作不在眼前 / 说不清在等什么</div>
+        </div>
+        <div class="state-idx">LABELED</div>
+      </div>
+      <div class="demo-row single">
+        <div class="demo dark">
+          <div class="pb-load" style="--mark:44px;--l1:13px;--l2:11px;--c1:#EDEFEE;--c2:#9AA0A3">
+            <svg class="mark" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="11.5"
+              fill="none" stroke="#8CC63F" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="54.2 18.1"/></svg>
+            <div class="txt"><span class="t1">Converting audio to MP3</span><span class="t2">This can take a minute</span></div>
+          </div>
+          <div class="demo-cap">On scrim · 遮罩上</div>
+        </div>
+      </div>
+      <div class="state-foot">
+        <span class="tag">标记 28dp</span><span class="tag">间距 14dp</span>
+        <span class="tag">主文 14sp/500</span><span class="tag">副文 12.5sp</span>
+      </div>
+    </div>
+
+    <div class="state-card">
+      <div class="state-head">
+        <div>
+          <div class="state-name">C · 下拉刷新</div>
+          <div class="state-use">浮在内容上 / 图片上 · 圆底保证可读</div>
+        </div>
+        <div class="state-idx">CHIP</div>
+      </div>
+      <div class="demo-row">
+        <div class="demo light">
+          <div class="chip"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="11.5"
+            fill="none" stroke="#4F7A18" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="54.2 18.1"/></svg></div>
+          <div class="demo-cap">Light</div>
+        </div>
+        <div class="demo dark">
+          <div class="chip"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="11.5"
+            fill="none" stroke="#4F7A18" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="54.2 18.1"/></svg></div>
+          <div class="demo-cap">Dark</div>
+        </div>
+      </div>
+      <div class="state-foot">
+        <span class="tag">圆底 36dp</span><span class="tag">弧 20dp</span><span class="tag">#FCFCFC + 投影</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-head"><h2>逐屏改后</h2><span>左边是现状（虚线框住旧 loader），右边是改后 · 24 张</span></div>
+  <div class="screens">
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/01-login-page-1.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/01-login-page-1.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Login page_1</b><span>灰面板 → 居中 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/02-login-page-2.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/02-login-page-2.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Login page_2</b><span>表单上 → 遮罩 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/03-discover-page-1.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/03-discover-page-1.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_1</b><span>白圆徽章 → 居中 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/04-discover-page-2.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/04-discover-page-2.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_2</b><span>白圆徽章 → 移到 banner 上 · 绿弧</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/05-discover-page-audiobooks.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/05-discover-page-audiobooks.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_Audiobooks</b><span>白圆徽章 → 居中 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/06-discover-page-topic.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/06-discover-page-topic.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_Topic</b><span>白圆徽章 → 居中 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/07-discover-page-categories-1.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/07-discover-page-categories-1.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_Categories_1</b><span>两个 loader → 行内 20dp</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/08-discover-page-categories-2.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/08-discover-page-categories-2.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_Categories_2</b><span>灰弧 → 原位 · 品牌弧</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/09-discover-page-networks.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/09-discover-page-networks.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_Networks</b><span>三点 → 居中 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/10-discover-page-trending-1.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/10-discover-page-trending-1.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_Trending_1</b><span>大灰弧 → 居中 · 36dp</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/11-discover-page-trending-2.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/11-discover-page-trending-2.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Discover page_Trending_2</b><span>行内弧+大字 → 居中 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/12-group-recording-1.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/12-group-recording-1.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Group Recording_1</b><span>表单保留 → 原位弧 28dp</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/13-group-recording-end-3.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/13-group-recording-end-3.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Group Recording_End_3</b><span>白卡 → 遮罩 + 有字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/14-group-recording-converting-4.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/14-group-recording-converting-4.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Group Recording_Converting_4</b><span>三点 → 遮罩 + 有字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/15-group-recording-2.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/15-group-recording-2.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Group Recording_2</b><span>灰弧 → 原位 · 品牌弧</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/16-library-page-1.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/16-library-page-1.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Library page_1</b><span>空态保留 → 原位 · 品牌弧</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/17-library-page-2.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/17-library-page-2.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Library page_2</b><span>灰弧压文字 → 原位 · 品牌弧</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/18-library-page-favorites.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/18-library-page-favorites.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Library page_Favorites</b><span>三点 → 居中 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/19-library-page-playlists.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/19-library-page-playlists.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Library page_Playlists</b><span>弧离开按钮 → 上方空白 · 内容保留</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/20-podcast-page.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/20-podcast-page.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Podcast page</b><span>三点 → 居中 · 无字</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/21-profile-page-manage-comments.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/21-profile-page-manage-comments.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Profile page_Manage Comments</b><span>徽章压内容 → 保留圆底 · 绿弧</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/22-comments-page.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/22-comments-page.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Comments page</b><span>白圆徽章 → 保留圆底 · 绿弧</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/23-profile-page-profile-photo.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/23-profile-page-profile-photo.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Profile page_Profile photo</b><span>上传 logo → 弧跟着头像</span></div>
+    </div>
+    <div class="sc">
+      <div class="pair">
+        <div class="col before"><em>BEFORE</em><img src="assets/before/24-recommend-page.jpg" alt=""></div>
+        <div class="arw">→</div>
+        <div class="col after"><em>AFTER</em><img src="assets/after/24-recommend-page.jpg" alt=""></div>
+      </div>
+      <div class="cap"><b>Recommend page</b><span>灰弧 → 居中 · 无字</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
