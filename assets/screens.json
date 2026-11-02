@@ -1,0 +1,122 @@
+[
+ {
+  "slug": "01-login-page-1",
+  "label": "Login page_1",
+  "note": "灰面板 → 居中 · 无字"
+ },
+ {
+  "slug": "02-login-page-2",
+  "label": "Login page_2",
+  "note": "表单上 → 遮罩 · 无字"
+ },
+ {
+  "slug": "03-discover-page-1",
+  "label": "Discover page_1",
+  "note": "白圆徽章 → 居中 · 无字"
+ },
+ {
+  "slug": "04-discover-page-2",
+  "label": "Discover page_2",
+  "note": "白圆徽章 → 移到 banner 上 · 绿弧"
+ },
+ {
+  "slug": "05-discover-page-audiobooks",
+  "label": "Discover page_Audiobooks",
+  "note": "白圆徽章 → 居中 · 无字"
+ },
+ {
+  "slug": "06-discover-page-topic",
+  "label": "Discover page_Topic",
+  "note": "白圆徽章 → 居中 · 无字"
+ },
+ {
+  "slug": "07-discover-page-categories-1",
+  "label": "Discover page_Categories_1",
+  "note": "两个 loader → 行内 20dp"
+ },
+ {
+  "slug": "08-discover-page-categories-2",
+  "label": "Discover page_Categories_2",
+  "note": "灰弧 → 原位 · 品牌弧"
+ },
+ {
+  "slug": "09-discover-page-networks",
+  "label": "Discover page_Networks",
+  "note": "三点 → 居中 · 无字"
+ },
+ {
+  "slug": "10-discover-page-trending-1",
+  "label": "Discover page_Trending_1",
+  "note": "大灰弧 → 居中 · 36dp"
+ },
+ {
+  "slug": "11-discover-page-trending-2",
+  "label": "Discover page_Trending_2",
+  "note": "行内弧+大字 → 居中 · 无字"
+ },
+ {
+  "slug": "12-group-recording-1",
+  "label": "Group Recording_1",
+  "note": "表单保留 → 原位弧 28dp"
+ },
+ {
+  "slug": "13-group-recording-end-3",
+  "label": "Group Recording_End_3",
+  "note": "白卡 → 遮罩 + 有字"
+ },
+ {
+  "slug": "14-group-recording-converting-4",
+  "label": "Group Recording_Converting_4",
+  "note": "三点 → 遮罩 + 有字"
+ },
+ {
+  "slug": "15-group-recording-2",
+  "label": "Group Recording_2",
+  "note": "灰弧 → 原位 · 品牌弧"
+ },
+ {
+  "slug": "16-library-page-1",
+  "label": "Library page_1",
+  "note": "空态保留 → 原位 · 品牌弧"
+ },
+ {
+  "slug": "17-library-page-2",
+  "label": "Library page_2",
+  "note": "灰弧压文字 → 原位 · 品牌弧"
+ },
+ {
+  "slug": "18-library-page-favorites",
+  "label": "Library page_Favorites",
+  "note": "三点 → 居中 · 无字"
+ },
+ {
+  "slug": "19-library-page-playlists",
+  "label": "Library page_Playlists",
+  "note": "弧离开按钮 → 上方空白 · 内容保留"
+ },
+ {
+  "slug": "20-podcast-page",
+  "label": "Podcast page",
+  "note": "三点 → 居中 · 无字"
+ },
+ {
+  "slug": "21-profile-page-manage-comments",
+  "label": "Profile page_Manage Comments",
+  "note": "徽章压内容 → 保留圆底 · 绿弧"
+ },
+ {
+  "slug": "22-comments-page",
+  "label": "Comments page",
+  "note": "白圆徽章 → 保留圆底 · 绿弧"
+ },
+ {
+  "slug": "23-profile-page-profile-photo",
+  "label": "Profile page_Profile photo",
+  "note": "上传 logo → 弧跟着头像"
+ },
+ {
+  "slug": "24-recommend-page",
+  "label": "Recommend page",
+  "note": "灰弧 → 居中 · 无字"
+ }
+]
